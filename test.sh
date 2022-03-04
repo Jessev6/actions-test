@@ -20,6 +20,7 @@ if git tag --sort=creatordate -l "v${MAJOR}.${DATE}.*" | tail -1; then
         echo
         echo "Tagging with v${MAJOR}.${DATE}.${MINOR}"
         git tag v${MAJOR}.${DATE}.${MINOR}
+        git push origin v${MAJOR}.${DATE}.${MINOR}
     fi
 else
     echo "Creating initial tag"
