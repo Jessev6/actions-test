@@ -3,18 +3,25 @@
 MAJOR=1
 DATE=$(date +"%y.%-U")
 
-if [ ! $(git tag -l v${MAJOR}.${DATE}.*) ]; then
+echo "Latest tag:"
+
+if git tag --sort=creatordate -l "v${MAJOR}.${DATE}.*" | tail -1; then
+    echo
+    echo "Tags for current commit:"
+    if git describe --tags --exact-match $(git log -1 --format="%H"); then
+        echo
+        echo "ERROR: Existing tags for current commit, not tagging"
+        exit 1
+
+    else
+        TAG=$(git tag --sort=creatordate -l "v${MAJOR}.${DATE}.*" | tail -1)
+        MINOR=$(($(echo $TAG | cut -d. -f4)+1))
+
+        echo
+        echo "Tagging with v${MAJOR}.${DATE}.${MINOR}"
+        git tag v${MAJOR}.${DATE}.${MINOR}
+    fi
+else
     echo "Creating initial tag"
     git tag v${MAJOR}.${DATE}.1
-else
-    echo "Checking if this commit already has a tag"
-    if [ ! $(git describe --tags --exact-match $(git log -1 --format="%H")) ]; then
-        TAG=$(git describe --tags --exact-match $(git log -1 --format="%H"))
-
-        MINOR=$(($(echo $TAG | cut -d. -f4)+1))
-        git tag v${MAJOR}.${DATE}.${MINOR}
-    else
-        echo "Already found a tag for this version, not tagging"
-        exit 1
-    fi
 fi
