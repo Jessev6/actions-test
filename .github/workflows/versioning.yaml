@@ -1,0 +1,10 @@
+name: Test versioning
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag-for-release:
+    
