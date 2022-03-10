@@ -1,0 +1,13 @@
+name: Release v1
+
+on:
+  push:
+    tags:
+      - v1.*
+jobs:
+  deploy-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo hello
+        shell: bash
+        run: echo 'Hello'
