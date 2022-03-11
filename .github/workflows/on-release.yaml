@@ -13,7 +13,7 @@ jobs:
       - name: echo
         shell: bash
         run: |
-          echo "Deploying ${{ github.ref_name	}} to dev"
+          echo "Deploying ${{ github.ref_name	}} to ${{ secrets.ENV }}"
 
   deploy-test:
     needs:
@@ -24,4 +24,4 @@ jobs:
       - name: echo
         shell: bash
         run: |
-          echo "Deploying ${{ github.ref_name	}} to test"
+          echo "Deploying ${{ github.ref_name	}} to ${{ secrets.ENV }}"
