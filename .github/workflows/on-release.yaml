@@ -6,9 +6,22 @@ on:
       - v1.*
 
 jobs:
-  deploy-release:
+  deploy-dev:
+    environment: dev
     runs-on: ubuntu-latest
     steps:
       - name: echo
         shell: bash
-        run: echo ${{ github.ref_name	}}
+        run: |
+        echo "Deploying ${{ github.ref_name	}} to dev"
+
+  deploy-test:
+    needs:
+      - deploy-dev
+    environment: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo
+        shell: bash
+        run: |
+        echo "Deploying ${{ github.ref_name	}} to test"
