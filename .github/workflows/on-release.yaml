@@ -9,6 +9,6 @@ jobs:
   deploy-release:
     runs-on: ubuntu-latest
     steps:
-      - name: echo hello
+      - name: echo
         shell: bash
-        run: echo 'Hello'
+        run: echo ${{ github.action_ref	}}
