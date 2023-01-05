@@ -1,0 +1,20 @@
+name: Test Workflow dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      true_or_false:
+        description: Input
+        type: boolean
+        default: true
+        required: false
+
+jobs:
+  display_made_choices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo
+        shell: bash
+        run: |
+          echo "true_or_false is set to ${{ inputs.true_or_false }}"
+
